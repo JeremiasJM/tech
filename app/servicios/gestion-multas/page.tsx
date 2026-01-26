@@ -95,9 +95,9 @@ export default function GestionMultasPage() {
             Sistema de Gestión
           </Badge>
           
-          <Title order={1} ta="center" size="3.5rem" fw={700} c="#1e40af" lh={1.1}>
+          <Title order={1} ta="center" size="3.5rem" fw={700} c="primary.5" lh={1.1}>
             Gestión de{' '}
-            <Text span c="#00d4ff" inherit>
+            <Text span c="primary.2" inherit>
               Multas e Infracciones
             </Text>
           </Title>
@@ -110,12 +110,12 @@ export default function GestionMultasPage() {
           <Group>
             <Button 
               size="xl" 
-              color="#1e40af"
+              color="primary.5"
               rightSection={<IconArrowRight size={20} />}
             >
               Solicitar Demo
             </Button>
-            <Button size="xl" variant="outline" color="#1e40af">
+            <Button size="xl" variant="outline" color="primary.5">
               Ver Funcionalidades
             </Button>
           </Group>

@@ -147,7 +147,7 @@ export default function HomePage() {
         src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
         style={{ position: 'relative', paddingTop: '80px', paddingBottom: '80px' }}
       >
-        <Overlay opacity={0.7} color="#1e40af" zIndex={1} />
+        <Overlay opacity={0.7} color="primary.5" zIndex={1} />
         <Container size="xl" style={{ position: 'relative', zIndex: 2 }}>
           <Grid align="center" gutter={50}>
             <Grid.Col span={{ base: 12, md: 7 }}>
@@ -159,7 +159,7 @@ export default function HomePage() {
                   leftSection={<IconBuilding size={16} />}
                   styles={{
                     root: {
-                      color: '#1e40af'
+                      color: 'var(--mantine-color-primary-5)'
                     }
                   }}
                 >
@@ -179,7 +179,7 @@ export default function HomePage() {
                   Tecnología que{' '}
                   <Text 
                     span 
-                    c="#00d4ff" 
+                    c="primary.2" 
                     inherit
                     style={{
                       fontWeight: 700
@@ -428,7 +428,7 @@ export default function HomePage() {
       </Box>
 
       {/* CTA Section */}
-      <Box style={{ backgroundColor: '#1e40af', padding: '80px 0' }}>
+      <Box style={{ backgroundColor: 'var(--mantine-color-primary-5)', padding: '80px 0' }}>
         <Container size="xl">
           <Stack gap="2rem" align="center" ta="center">
             <AnimatedElement delay={0.1}>

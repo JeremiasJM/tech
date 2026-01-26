@@ -5,6 +5,7 @@ import '@mantine/dates/styles.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { theme } from '../theme';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,26 +29,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={inter.className}>
-        <MantineProvider 
-          theme={{
-            primaryColor: 'blue',
-            colors: {
-              blue: [
-                '#ebf4ff',
-                '#c8e1ff',
-                '#9fcdff',
-                '#74b8ff',
-                '#4da3ff',
-                '#1a8fff',
-                '#0070e6',
-                '#005bb3',
-                '#004580',
-                '#00304d'
-              ],
-            },
-            fontFamily: inter.style.fontFamily,
-          }}
-        >
+        <MantineProvider theme={theme}>
           {children}
         </MantineProvider>
       </body>
