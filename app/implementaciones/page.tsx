@@ -186,47 +186,100 @@ export default function ImplementacionesPage() {
           
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="xl">
             {easySteps.map((step, index) => (
-              <Card key={index} padding="xl" radius="lg" style={{ 
-                height: '100%', 
-                border: '2px solid #f8f9fa',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  borderColor: step.color,
-                  transform: 'translateY(-5px)',
-                  boxShadow: '0 10px 25px rgba(30, 64, 175, 0.1)'
-                }
-              }}>
-                <Stack gap="md">
+              <Card key={index} 
+                radius="2rem" 
+                style={{ 
+                  height: '100%', 
+                  background: `linear-gradient(135deg, 
+                    ${index % 2 === 0 ? '#ffffff' : '#f8fafe'} 0%, 
+                    ${index % 2 === 0 ? '#f8fafe' : '#ffffff'} 100%)`,
+                  border: '3px solid #e3f2fd',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 32px rgba(30,64,175,0.08)',
+                  cursor: 'default'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(30,64,175,0.15)';
+                  e.currentTarget.style.borderColor = '#1e40af';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(30,64,175,0.08)';
+                  e.currentTarget.style.borderColor = '#e3f2fd';
+                }}>
+                
+                {/* Elemento decorativo */}
+                <Box style={{
+                  position: 'absolute',
+                  top: -15,
+                  right: -15,
+                  width: 60,
+                  height: 60,
+                  background: `radial-gradient(circle, ${step.color === '#1e40af' ? 'rgba(30,64,175,0.08)' : 'rgba(0,212,255,0.08)'} 0%, transparent 70%)`,
+                  borderRadius: '50%'
+                }} />
+                
+                <Stack gap="md" style={{ position: 'relative', padding: '1.5rem', zIndex: 2 }}>
                   <Group justify="space-between" align="flex-start">
                     <Box style={{ 
-                      backgroundColor: step.color, 
+                      background: `linear-gradient(135deg, ${step.color} 0%, ${step.color === '#1e40af' ? '#3b82f6' : '#1e88e5'} 100%)`,
                       color: 'white', 
                       borderRadius: '50%', 
-                      width: 40, 
-                      height: 40, 
+                      width: 50, 
+                      height: 50, 
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
                       fontSize: '1.2rem',
-                      fontWeight: 700
+                      fontWeight: 700,
+                      boxShadow: `0 6px 20px ${step.color === '#1e40af' ? 'rgba(30,64,175,0.3)' : 'rgba(0,212,255,0.3)'}`,
+                      transition: 'transform 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.1) rotate(10deg)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
                     }}>
                       {step.number}
                     </Box>
-                    <Badge variant="light" size="sm" color="gray">
+                    <Badge variant="light" size="sm" 
+                      style={{
+                        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                        border: '2px solid #e3f2fd',
+                        color: '#1e40af'
+                      }}>
                       {step.duration}
                     </Badge>
                   </Group>
                   
                   <Stack gap="xs">
                     <Group gap="sm">
-                      <ThemeIcon size={40} radius="xl" color={step.color} variant="light">
-                        <step.icon size={20} />
-                      </ThemeIcon>
-                      <Text fw={600} size="lg" c={step.color}>
+                      <Box style={{
+                        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                        borderRadius: '50%',
+                        padding: '0.6rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '2px solid #e3f2fd'
+                      }}>
+                        <step.icon size={20} color={step.color} />
+                      </Box>
+                      <Text fw={700} size="lg" 
+                        style={{
+                          background: `linear-gradient(135deg, ${step.color} 0%, ${step.color === '#1e40af' ? '#3b82f6' : '#1e88e5'} 100%)`,
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text'
+                        }}>
                         {step.title}
                       </Text>
                     </Group>
-                    <Text c="dimmed" size="sm" lh={1.6}>
+                    <Text c="gray.6" size="sm" lh={1.6}>
                       {step.description}
                     </Text>
                   </Stack>
@@ -247,14 +300,57 @@ export default function ImplementacionesPage() {
             
             <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl">
               {whyEasy.map((item, index) => (
-                <Paper key={index} p="xl" radius="lg" style={{ backgroundColor: 'white', border: '2px solid white' }}>
-                  <Group gap="md">
-                    <ThemeIcon size={50} radius="xl" color="white" style={{ backgroundColor: 'white' }}>
-                      <item.icon size={25} color="#1e40af" />
-                    </ThemeIcon>
+                <Paper key={index} 
+                  radius="1.5rem" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.1) 100%)',
+                    border: '2px solid rgba(255,255,255,0.25)',
+                    backdropFilter: 'blur(10px)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    cursor: 'default'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                  }}>
+                  
+                  {/* Elemento decorativo */}
+                  <Box style={{
+                    position: 'absolute',
+                    top: -15,
+                    right: -15,
+                    width: 60,
+                    height: 60,
+                    background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                    borderRadius: '50%'
+                  }} />
+                  
+                  <Group gap="md" style={{ position: 'relative', padding: '1.5rem', zIndex: 2 }}>
+                    <Box style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.1) 100%)',
+                      borderRadius: '50%',
+                      padding: '0.8rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                      border: '1px solid rgba(255,255,255,0.3)',
+                      backdropFilter: 'blur(5px)'
+                    }}>
+                      <item.icon size={25} color="white" />
+                    </Box>
                     <Stack gap="xs" style={{ flex: 1 }}>
-                      <Text fw={600} size="lg" c="#1e40af">{item.title}</Text>
-                      <Text c="dimmed" size="sm" lh={1.5}>{item.description}</Text>
+                      <Text fw={700} size="lg" c="white">{item.title}</Text>
+                      <Text c="rgba(255,255,255,0.9)" size="sm" lh={1.5}>{item.description}</Text>
                     </Stack>
                   </Group>
                 </Paper>
@@ -273,17 +369,74 @@ export default function ImplementacionesPage() {
           
           <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl">
             {guarantees.map((guarantee, index) => (
-              <Paper key={index} p="xl" radius="lg" ta="center" style={{ 
-                border: '2px solid #1e40af',
-                backgroundColor: 'white'
-              }}>
-                <Stack align="center" gap="md">
-                  <ThemeIcon size={70} radius="xl" color="#1e40af">
-                    <guarantee.icon size={35} />
-                  </ThemeIcon>
+              <Paper key={index} 
+                radius="2rem" 
+                style={{ 
+                  background: `linear-gradient(135deg, 
+                    ${index % 2 === 0 ? '#ffffff' : '#f8fafe'} 0%, 
+                    ${index % 2 === 0 ? '#f8fafe' : '#ffffff'} 100%)`,
+                  border: '3px solid #e3f2fd',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  textAlign: 'center',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 32px rgba(30,64,175,0.08)',
+                  cursor: 'default'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 20px 50px rgba(30,64,175,0.15)';
+                  e.currentTarget.style.borderColor = '#1e40af';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(30,64,175,0.08)';
+                  e.currentTarget.style.borderColor = '#e3f2fd';
+                }}>
+                
+                {/* Elemento decorativo */}
+                <Box style={{
+                  position: 'absolute',
+                  top: -20,
+                  right: -20,
+                  width: 80,
+                  height: 80,
+                  background: `radial-gradient(circle, ${['rgba(30,64,175,0.06)', 'rgba(0,212,255,0.06)', 'rgba(59,130,246,0.06)'][index % 3]} 0%, transparent 70%)`,
+                  borderRadius: '50%'
+                }} />
+                
+                <Stack align="center" gap="md" style={{ position: 'relative', padding: '2rem', zIndex: 2 }}>
+                  <Box style={{
+                    background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                    borderRadius: '50%',
+                    padding: '1.2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 25px rgba(30,64,175,0.25)',
+                    transform: 'scale(1)',
+                    transition: 'transform 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                  }}>
+                    <guarantee.icon size={35} color="white" />
+                  </Box>
+                  
                   <Stack gap="xs" align="center">
-                    <Text fw={700} size="lg" c="#1e40af">{guarantee.title}</Text>
-                    <Text c="dimmed" size="sm">{guarantee.subtitle}</Text>
+                    <Text fw={700} size="lg" 
+                      style={{
+                        background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}>
+                      {guarantee.title}
+                    </Text>
+                    <Text c="gray.6" size="sm">{guarantee.subtitle}</Text>
                   </Stack>
                 </Stack>
               </Paper>

@@ -287,31 +287,73 @@ export default function HomePage() {
             <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="xl" w="100%" style={{ justifyContent: 'center' }}>
               {services.map((service, index) => (
                 <AnimatedElement key={service.title} delay={0.2 + (index * 0.1)}>
-                  <Paper p="2rem" radius="xl" style={{ 
-                    backgroundColor: 'white',
-                    border: '2px solid #e3f2fd',
-                    transition: 'all 0.3s ease',
-                    height: '100%',
-                    cursor: 'default',
-                    margin: '0 auto'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-8px)';
-                    e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)';
-                    e.currentTarget.style.borderColor = '#3b82f6';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.borderColor = '#e3f2fd';
-                  }}>
-                    <Stack gap="lg" h="100%">
-                      <ThemeIcon size={70} color={service.color} variant="light" radius="xl" mx="auto">
-                        <service.icon size={35} />
-                      </ThemeIcon>
+                  <Paper 
+                    radius="2rem" 
+                    style={{ 
+                      background: `linear-gradient(135deg, 
+                        ${index % 2 === 0 ? '#ffffff' : '#f8fafe'} 0%, 
+                        ${index % 2 === 0 ? '#f8fafe' : '#ffffff'} 100%)`,
+                      border: '3px solid #e3f2fd',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      height: '100%',
+                      cursor: 'default',
+                      margin: '0 auto',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      boxShadow: '0 8px 32px rgba(30,64,175,0.08)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                      e.currentTarget.style.boxShadow = '0 20px 50px rgba(30,64,175,0.15)';
+                      e.currentTarget.style.borderColor = '#1e40af';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                      e.currentTarget.style.boxShadow = '0 8px 32px rgba(30,64,175,0.08)';
+                      e.currentTarget.style.borderColor = '#e3f2fd';
+                    }}>
+                    
+                    {/* Elemento decorativo */}
+                    <Box style={{
+                      position: 'absolute',
+                      top: -20,
+                      right: -20,
+                      width: 80,
+                      height: 80,
+                      background: `radial-gradient(circle, ${['rgba(30,64,175,0.06)', 'rgba(0,212,255,0.06)', 'rgba(59,130,246,0.06)'][index % 3]} 0%, transparent 70%)`,
+                      borderRadius: '50%'
+                    }} />
+                    
+                    <Stack gap="lg" h="100%" style={{ position: 'relative', padding: '2rem', zIndex: 2 }}>
+                      <Box style={{
+                        background: `linear-gradient(135deg, ${service.color === 'blue' ? '#1e40af' : '#00d4ff'} 0%, ${service.color === 'blue' ? '#3b82f6' : '#1e88e5'} 100%)`,
+                        borderRadius: '50%',
+                        padding: '1.2rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto',
+                        boxShadow: `0 8px 25px ${service.color === 'blue' ? 'rgba(30,64,175,0.25)' : 'rgba(0,212,255,0.25)'}`,
+                        transform: 'scale(1)',
+                        transition: 'transform 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                      }}>
+                        <service.icon size={35} color="white" />
+                      </Box>
                       
                       <Box ta="center">
-                        <Title order={4} size="lg" fw={600} mb="sm" c="gray.8">
+                        <Title order={4} size="lg" fw={700} mb="sm"
+                          style={{
+                            background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text'
+                          }}>
                           {service.title}
                         </Title>
                         <Text c="gray.6" size="md" lh={1.6}>
@@ -325,6 +367,21 @@ export default function HomePage() {
                         fullWidth
                         mt="auto"
                         radius="md"
+                        style={{
+                          background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                          border: '2px solid #e3f2fd',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)';
+                          e.currentTarget.style.color = 'white';
+                          e.currentTarget.style.borderColor = '#1e40af';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)';
+                          e.currentTarget.style.color = '';
+                          e.currentTarget.style.borderColor = '#e3f2fd';
+                        }}
                       >
                         Conocer más
                       </Button>
@@ -359,32 +416,89 @@ export default function HomePage() {
                     </Text>
                   </Box>
                   
-                  <Paper p="2rem" radius="xl" style={{ 
-                    backgroundColor: '#f8fafe',
-                    border: '2px solid #e3f2fd'
-                  }}>
-                    <Stack gap="lg">
-                      <Text c="gray.7" size="lg" lh={1.6} style={{ fontStyle: 'italic' }}>
-                        "{testimonial.content}"
-                      </Text>
-                      
-                      <Group gap="md">
-                        <ThemeIcon size={50} color="blue" variant="filled" radius="xl">
-                          <Text c="white" fw={600}>{testimonial.avatar}</Text>
-                        </ThemeIcon>
-                        <Box>
-                          <Text fw={600} size="lg" c="gray.8">
-                            {testimonial.name}
-                          </Text>
-                          <Text size="md" c="gray.6">
-                            {testimonial.position}
-                          </Text>
-                          <Text size="md" c="blue.6" fw={500}>
-                            {testimonial.organization}
-                          </Text>
-                        </Box>
-                      </Group>
-                    </Stack>
+                  <Paper 
+                    radius="2rem" 
+                    style={{ 
+                      background: 'linear-gradient(135deg, #f8fafe 0%, #ffffff 50%, #f0f9ff 100%)',
+                      border: '3px solid #e3f2fd',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      boxShadow: '0 8px 32px rgba(30,64,175,0.08)'
+                    }}>
+                    {/* Elemento decorativo */}
+                    <Box style={{
+                      position: 'absolute',
+                      top: -30,
+                      right: -30,
+                      width: 100,
+                      height: 100,
+                      background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%)',
+                      borderRadius: '50%'
+                    }} />
+                    <Box style={{ position: 'relative', padding: '2rem', zIndex: 2 }}>
+                      <Stack gap="lg">
+                        <Text c="gray.7" size="lg" lh={1.6} fw={500} style={{ fontStyle: 'italic', position: 'relative' }}>
+                          <Box style={{
+                            position: 'absolute',
+                            top: -10,
+                            left: -10,
+                            fontSize: '3rem',
+                            color: '#00d4ff',
+                            opacity: 0.3
+                          }}>
+                            "
+                          </Box>
+                          {testimonial.content}
+                          <Box style={{
+                            position: 'absolute',
+                            bottom: -10,
+                            right: -10,
+                            fontSize: '3rem',
+                            color: '#00d4ff',
+                            opacity: 0.3
+                          }}>
+                            "
+                          </Box>
+                        </Text>
+                        
+                        <Group gap="md">
+                          <Box style={{
+                            background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                            borderRadius: '50%',
+                            padding: '0.8rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '0 8px 25px rgba(30,64,175,0.25)'
+                          }}>
+                            <Text c="white" fw={600} size="lg">{testimonial.avatar}</Text>
+                          </Box>
+                          <Box>
+                            <Text fw={700} size="lg"
+                              style={{
+                                background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text'
+                              }}>
+                              {testimonial.name}
+                            </Text>
+                            <Text size="md" c="gray.6" fw={500}>
+                              {testimonial.position}
+                            </Text>
+                            <Text size="md" fw={600}
+                              style={{
+                                background: 'linear-gradient(135deg, #00d4ff 0%, #1e88e5 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text'
+                              }}>
+                              {testimonial.organization}
+                            </Text>
+                          </Box>
+                        </Group>
+                      </Stack>
+                    </Box>
                   </Paper>
                 </Stack>
               </AnimatedElement>
@@ -399,24 +513,53 @@ export default function HomePage() {
                   { value: '24/7', label: 'Soporte' }
                 ].map((metric, index) => (
                   <AnimatedElement key={metric.label} delay={0.4 + (index * 0.1)} direction="right">
-                    <Paper p="xl" radius="lg" style={{ 
-                      textAlign: 'center', 
-                      backgroundColor: '#f8fafe',
-                      border: '2px solid #e3f2fd',
-                      transition: 'all 0.3s ease',
-                      cursor: 'default'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'scale(1.05)';
-                      e.currentTarget.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.15)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}>
-                      <Stack gap="sm">
-                        <Text size="3xl" fw={700} c="blue.6">{metric.value}</Text>
-                        <Text size="sm" c="gray.6" fw={500}>{metric.label}</Text>
+                    <Paper 
+                      radius="1.5rem" 
+                      style={{ 
+                        textAlign: 'center', 
+                        background: `linear-gradient(135deg, 
+                          ${index % 2 === 0 ? '#f8fafe' : '#f0f9ff'} 0%, 
+                          ${index % 2 === 0 ? '#ffffff' : '#f8fafe'} 100%)`,
+                        border: '3px solid #e3f2fd',
+                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        cursor: 'default',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 32px rgba(30,64,175,0.08)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.08) rotate(1deg)';
+                        e.currentTarget.style.boxShadow = '0 15px 40px rgba(59, 130, 246, 0.2)';
+                        e.currentTarget.style.borderColor = '#1e40af';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                        e.currentTarget.style.boxShadow = '0 8px 32px rgba(30,64,175,0.08)';
+                        e.currentTarget.style.borderColor = '#e3f2fd';
+                      }}>
+                      
+                      {/* Elemento decorativo */}
+                      <Box style={{
+                        position: 'absolute',
+                        top: -15,
+                        right: -15,
+                        width: 50,
+                        height: 50,
+                        background: `radial-gradient(circle, ${index % 2 === 0 ? 'rgba(30,64,175,0.06)' : 'rgba(0,212,255,0.06)'} 0%, transparent 70%)`,
+                        borderRadius: '50%'
+                      }} />
+                      
+                      <Stack gap="sm" style={{ position: 'relative', padding: '1.5rem', zIndex: 2 }}>
+                        <Text size="3.5rem" fw={700} lh={1}
+                          style={{
+                            background: `linear-gradient(135deg, ${index % 2 === 0 ? '#1e40af' : '#00d4ff'} 0%, ${index % 2 === 0 ? '#3b82f6' : '#1e88e5'} 100%)`,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text'
+                          }}>
+                          {metric.value}
+                        </Text>
+                        <Text size="sm" c="gray.6" fw={600}>{metric.label}</Text>
                       </Stack>
                     </Paper>
                   </AnimatedElement>

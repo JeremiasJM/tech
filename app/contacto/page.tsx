@@ -106,19 +106,75 @@ export default function ContactoPage() {
       <Container size="xl" py={40}>
         <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl">
           {contactInfo.map((info, index) => (
-            <Paper key={index} p="xl" radius="lg" style={{ 
-              border: '2px solid #1e40af',
-              backgroundColor: 'white',
-              textAlign: 'center'
-            }}>
-              <Stack align="center" gap="md">
-                <ThemeIcon size={60} radius="xl" color="#1e40af">
-                  <info.icon size={30} />
-                </ThemeIcon>
+            <Paper key={index} 
+              radius="2rem" 
+              style={{ 
+                background: `linear-gradient(135deg, 
+                  ${index % 2 === 0 ? '#ffffff' : '#f8fafe'} 0%, 
+                  ${index % 2 === 0 ? '#f8fafe' : '#ffffff'} 100%)`,
+                border: '3px solid #e3f2fd',
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                textAlign: 'center',
+                position: 'relative',
+                overflow: 'hidden',
+                boxShadow: '0 8px 32px rgba(30,64,175,0.08)',
+                cursor: 'default'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 20px 50px rgba(30,64,175,0.15)';
+                e.currentTarget.style.borderColor = '#1e40af';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(30,64,175,0.08)';
+                e.currentTarget.style.borderColor = '#e3f2fd';
+              }}>
+              
+              {/* Elemento decorativo */}
+              <Box style={{
+                position: 'absolute',
+                top: -20,
+                right: -20,
+                width: 80,
+                height: 80,
+                background: `radial-gradient(circle, ${['rgba(30,64,175,0.06)', 'rgba(0,212,255,0.06)', 'rgba(59,130,246,0.06)'][index % 3]} 0%, transparent 70%)`,
+                borderRadius: '50%'
+              }} />
+              
+              <Stack align="center" gap="md" style={{ position: 'relative', padding: '2rem', zIndex: 2 }}>
+                <Box style={{
+                  background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                  borderRadius: '50%',
+                  padding: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 8px 25px rgba(30,64,175,0.25)',
+                  transform: 'scale(1)',
+                  transition: 'transform 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                }}>
+                  <info.icon size={30} color="white" />
+                </Box>
+                
                 <Stack gap="xs" align="center">
-                  <Text fw={600} size="lg" c="#1e40af">{info.title}</Text>
-                  <Text fw={700} size="md">{info.value}</Text>
-                  <Text c="dimmed" size="sm">{info.subtitle}</Text>
+                  <Text fw={700} size="lg" 
+                    style={{
+                      background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>
+                    {info.title}
+                  </Text>
+                  <Text fw={600} size="md" c="gray.8">{info.value}</Text>
+                  <Text c="gray.6" size="sm">{info.subtitle}</Text>
                 </Stack>
               </Stack>
             </Paper>
