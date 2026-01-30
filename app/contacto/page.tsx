@@ -12,9 +12,11 @@ import {
   Box,
   ThemeIcon,
   Button,
-  TextInput,
+  Input,
   Textarea,
-  Select,
+  Combobox,
+  InputBase,
+  useCombobox,
   SimpleGrid
 } from '@mantine/core';
 import {
@@ -29,6 +31,40 @@ import {
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { useState } from 'react';
+
+// Estilos CSS globales para el Combobox
+const selectStyles = `
+[data-mantine-color-scheme] .mantine-Combobox-dropdown {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-mantine-color-scheme] .mantine-Combobox-option {
+  color: #1f2937 !important;
+  background-color: white !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 12px 16px !important;
+}
+
+[data-mantine-color-scheme] .mantine-Combobox-option[data-combobox-selected="true"] {
+  background-color: #1e40af !important;
+  color: white !important;
+}
+
+[data-mantine-color-scheme] .mantine-Combobox-option:hover,
+[data-mantine-color-scheme] .mantine-Combobox-option[data-combobox-hovered="true"] {
+  background-color: #f3f4f6 !important;
+  color: #1e40af !important;
+}
+
+[data-mantine-color-scheme] .mantine-Combobox-option[data-combobox-selected="true"]:hover {
+  background-color: #1e40af !important;
+  color: white !important;
+}
+`;
 
 const contactInfo = [
   {
@@ -61,6 +97,21 @@ export default function ContactoPage() {
     mensaje: ''
   });
 
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
+  const asuntoOptions = [
+    'Gestión de Multas/Infracciones',
+    'Asistente Virtual/Chatbot',
+    'Gestión de Obras Públicas',
+    'Sistema de Turnos',
+    'Gestión de Inventarios',
+    'Gestión de Padrones',
+    'Consultoría General',
+    'Otro (especificar en mensaje)'
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí manejarías el envío del formulario
@@ -69,12 +120,68 @@ export default function ContactoPage() {
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    let processedValue = value;
+    
+    // Validaciones según el campo
+    switch (field) {
+      case 'nombre':
+        // Máximo 50 caracteres, solo letras y espacios
+        if (value.length <= 50 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(value)) {
+          processedValue = value;
+        } else {
+          return; // No actualiza si no cumple las validaciones
+        }
+        break;
+        
+      case 'email':
+        // Máximo 100 caracteres
+        if (value.length <= 100) {
+          processedValue = value;
+        } else {
+          return;
+        }
+        break;
+        
+      case 'telefono':
+        // Solo números, espacios, +, -, (, ) - máximo 15 caracteres
+        const cleanValue = value.replace(/[^0-9\s\+\-\(\)]/g, '');
+        if (cleanValue.length <= 15) {
+          processedValue = cleanValue;
+        } else {
+          return;
+        }
+        break;
+        
+      case 'organismo':
+        // Máximo 100 caracteres
+        if (value.length <= 100) {
+          processedValue = value;
+        } else {
+          return;
+        }
+        break;
+        
+      case 'mensaje':
+        // Máximo 500 caracteres
+        if (value.length <= 500) {
+          processedValue = value;
+        } else {
+          return;
+        }
+        break;
+        
+      default:
+        processedValue = value;
+    }
+    
+    setFormData(prev => ({ ...prev, [field]: processedValue }));
   };
 
   return (
-    <Box style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'white' }}>
-      <Navbar />
+    <>
+      <style dangerouslySetInnerHTML={{ __html: selectStyles }} />
+      <Box style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'white' }}>
+        <Navbar />
       
       {/* Hero Section */}
       <Container size="xl" py={80}>
@@ -225,75 +332,151 @@ export default function ContactoPage() {
               <Paper p="xl" radius="lg" style={{ backgroundColor: 'white' }}>
                 <form onSubmit={handleSubmit}>
                   <Stack gap="md">
-                    <TextInput
+                    <Input.Wrapper
                       label="Nombre completo"
-                      placeholder="Tu nombre y apellido"
                       required
-                      value={formData.nombre}
-                      onChange={(e) => handleChange('nombre', e.target.value)}
                       styles={{
                         label: { fontWeight: 600, color: '#1e40af' }
                       }}
-                    />
+                    >
+                      <Input
+                        placeholder="Tu nombre y apellido"
+                        value={formData.nombre}
+                        onChange={(e) => handleChange('nombre', e.target.value)}
+                        styles={{
+                          input: {
+                            '&:focus': {
+                              borderColor: '#1e40af',
+                              backgroundColor: '#f8faff',
+                              boxShadow: '0 0 0 3px rgba(30, 64, 175, 0.1)'
+                            },
+                            transition: 'all 0.2s ease'
+                          }
+                        }}
+                      />
+                    </Input.Wrapper>
 
                     <Grid>
                       <Grid.Col span={6}>
-                        <TextInput
+                        <Input.Wrapper
                           label="Email"
-                          type="email"
-                          placeholder="tu@email.com"
                           required
-                          value={formData.email}
-                          onChange={(e) => handleChange('email', e.target.value)}
                           styles={{
                             label: { fontWeight: 600, color: '#1e40af' }
                           }}
-                        />
+                        >
+                          <Input
+                            type="email"
+                            placeholder="tu@email.com"
+                            value={formData.email}
+                            onChange={(e) => handleChange('email', e.target.value)}
+                            styles={{
+                              input: {
+                                '&:focus': {
+                                  borderColor: '#1e40af',
+                                  backgroundColor: '#f8faff',
+                                  boxShadow: '0 0 0 3px rgba(30, 64, 175, 0.1)'
+                                },
+                                transition: 'all 0.2s ease'
+                              }
+                            }}
+                          />
+                        </Input.Wrapper>
                       </Grid.Col>
                       <Grid.Col span={6}>
-                        <TextInput
+                        <Input.Wrapper
                           label="Teléfono"
-                          placeholder="+54 11 1234-5678"
-                          value={formData.telefono}
-                          onChange={(e) => handleChange('telefono', e.target.value)}
                           styles={{
                             label: { fontWeight: 600, color: '#1e40af' }
                           }}
-                        />
+                        >
+                          <Input
+                            placeholder="+54 11 1234-5678"
+                            value={formData.telefono}
+                            onChange={(e) => handleChange('telefono', e.target.value)}
+                            styles={{
+                              input: {
+                                '&:focus': {
+                                  borderColor: '#1e40af',
+                                  backgroundColor: '#f8faff',
+                                  boxShadow: '0 0 0 3px rgba(30, 64, 175, 0.1)'
+                                },
+                                transition: 'all 0.2s ease'
+                              }
+                            }}
+                          />
+                        </Input.Wrapper>
                       </Grid.Col>
                     </Grid>
 
-                    <TextInput
+                    <Input.Wrapper
                       label="Organismo/Institución"
-                      placeholder="Municipalidad, Ministerio, etc."
                       required
-                      value={formData.organismo}
-                      onChange={(e) => handleChange('organismo', e.target.value)}
                       styles={{
                         label: { fontWeight: 600, color: '#1e40af' }
                       }}
-                    />
+                    >
+                      <Input
+                        placeholder="Municipalidad, Ministerio, etc."
+                        value={formData.organismo}
+                        onChange={(e) => handleChange('organismo', e.target.value)}
+                        styles={{
+                          input: {
+                            '&:focus': {
+                              borderColor: '#1e40af',
+                              backgroundColor: '#f8faff',
+                              boxShadow: '0 0 0 3px rgba(30, 64, 175, 0.1)'
+                            },
+                            transition: 'all 0.2s ease'
+                          }
+                        }}
+                      />
+                    </Input.Wrapper>
 
-                    <Select
-                      label="¿En qué podemos ayudarte?"
-                      placeholder="Selecciona una opción"
-                      required
-                      value={formData.asunto}
-                      onChange={(value) => handleChange('asunto', value || '')}
-                      data={[
-                        'Gestión de Multas/Infracciones',
-                        'Asistente Virtual/Chatbot',
-                        'Gestión de Obras Públicas',
-                        'Sistema de Turnos',
-                        'Gestión de Inventarios',
-                        'Gestión de Padrones',
-                        'Consultoría General',
-                        'Otro (especificar en mensaje)'
-                      ]}
-                      styles={{
-                        label: { fontWeight: 600, color: '#1e40af' }
+                    <Combobox
+                      store={combobox}
+                      onOptionSubmit={(val) => {
+                        handleChange('asunto', val);
+                        combobox.closeDropdown();
                       }}
-                    />
+                    >
+                      <Combobox.Target>
+                        <InputBase
+                          component="button"
+                          type="button"
+                          pointer
+                          rightSection={<Combobox.Chevron />}
+                          onClick={() => combobox.toggleDropdown()}
+                          rightSectionPointerEvents="none"
+                          label="¿En qué podemos ayudarte?"
+                          required
+                          styles={{
+                            label: { fontWeight: 600, color: '#1e40af' },
+                            input: {
+                              '&:focus': {
+                                borderColor: '#1e40af',
+                                backgroundColor: '#f8faff',
+                                boxShadow: '0 0 0 3px rgba(30, 64, 175, 0.1)'
+                              },
+                              transition: 'all 0.2s ease',
+                              textAlign: 'left'
+                            }
+                          }}
+                        >
+                          {formData.asunto || <Input.Placeholder>Selecciona una opción</Input.Placeholder>}
+                        </InputBase>
+                      </Combobox.Target>
+
+                      <Combobox.Dropdown>
+                        <Combobox.Options>
+                          {asuntoOptions.map((item) => (
+                            <Combobox.Option value={item} key={item}>
+                              {item}
+                            </Combobox.Option>
+                          ))}
+                        </Combobox.Options>
+                      </Combobox.Dropdown>
+                    </Combobox>
 
                     <Textarea
                       label="Mensaje"
@@ -306,6 +489,10 @@ export default function ContactoPage() {
                         label: { fontWeight: 600, color: '#1e40af' }
                       }}
                     />
+                    
+                    <Text size="xs" c="dimmed" ta="right">
+                      {formData.mensaje.length}/500 caracteres
+                    </Text>
 
                     <Button
                       type="submit"
@@ -327,7 +514,8 @@ export default function ContactoPage() {
 
       
 
-      <Footer />
-    </Box>
+        <Footer />
+      </Box>
+    </>
   );
 }
