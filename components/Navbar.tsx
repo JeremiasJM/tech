@@ -105,7 +105,17 @@ export function Navbar() {
               {navigationItems.map((item) => {
                 if (item.submenu) {
                   return (
-                    <Menu key={item.label} trigger="hover" openDelay={100} closeDelay={400}>
+                    <Menu 
+                      key={item.label} 
+                      trigger="hover" 
+                      openDelay={100} 
+                      closeDelay={400}
+                      styles={{
+                        dropdown: {
+                          zIndex: 1001
+                        }
+                      }}
+                    >
                       <Menu.Target>
                         <Button
                           variant="subtle"

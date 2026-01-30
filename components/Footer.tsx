@@ -98,7 +98,7 @@ export function Footer() {
                 </Group>
                 <Group gap="xs">
                   <IconMapPin size={16} color="#74c0fc" />
-                  <Text size="sm" c="gray.4">Buenos Aires, Argentina</Text>
+                  <Text size="sm" c="gray.4">Tucumán, Argentina</Text>
                 </Group>
               </Stack>
 

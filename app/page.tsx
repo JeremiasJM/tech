@@ -267,7 +267,7 @@ export default function HomePage() {
         <Container size="xl">
           <Stack gap="3rem" align="center">
             <AnimatedElement delay={0.1}>
-              <Box ta="center" maw={800}>
+              <Box ta="center" mx={"auto"} maw={800}>
                 <Badge variant="light" color="blue" size="lg" mb="md">
                   Nuestros Servicios
                 </Badge>
@@ -438,7 +438,7 @@ export default function HomePage() {
             </AnimatedElement>
             
             <AnimatedElement delay={0.2}>
-              <Title order={2} size="3rem" fw={700} c="white" maw={800}>
+              <Title order={2} size="3rem" fw={700} c="white" maw={800} mx="auto">
                 Moderniza tu organismo público con{' '}
                 <Text span c="blue.1" inherit>
                   tecnología avanzada
@@ -447,14 +447,14 @@ export default function HomePage() {
             </AnimatedElement>
             
             <AnimatedElement delay={0.3}>
-              <Text size="xl" c="blue.1" lh={1.6} maw={700}>
+              <Text size="xl" c="blue.1" lh={1.6} maw={700} mx="auto">
                 Solicita una demostración personalizada y descubre cómo nuestras 
                 soluciones pueden revolucionar la gestión de tu institución.
               </Text>
             </AnimatedElement>
             
             <AnimatedElement delay={0.4}>
-              <Group gap="lg" mt="xl">
+              <Group gap="lg" mt="xl" justify='center'>
                 <Button
                   component={Link}
                   href="/contacto"

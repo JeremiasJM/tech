@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" data-mantine-color-scheme="light">
       <head>
         <ColorSchemeScript />
       </head>

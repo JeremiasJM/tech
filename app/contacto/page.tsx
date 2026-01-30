@@ -46,7 +46,7 @@ const contactInfo = [
   {
     icon: IconMapPin,
     title: 'Ubicación',
-    value: 'Buenos Aires, Argentina',
+    value: 'Tucumán, Argentina',
     subtitle: 'Atención presencial con cita'
   }
 ];
