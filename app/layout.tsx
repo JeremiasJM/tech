@@ -6,6 +6,8 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { theme } from '../theme';
+import { LoadingProvider } from '../components/LoadingProvider';
+import { LoadingWrapper } from '../components/LoadingWrapper';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,7 +32,11 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider theme={theme}>
-          {children}
+          <LoadingProvider>
+            <LoadingWrapper>
+              {children}
+            </LoadingWrapper>
+          </LoadingProvider>
         </MantineProvider>
       </body>
     </html>

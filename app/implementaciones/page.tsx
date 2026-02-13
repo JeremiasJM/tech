@@ -42,7 +42,6 @@ const easySteps = [
     number: '01',
     title: 'Conversamos',
     description: 'Una reunión inicial para entender tus necesidades específicas.',
-    duration: '1 reunión',
     color: '#1e40af'
   },
   {
@@ -50,7 +49,6 @@ const easySteps = [
     number: '02', 
     title: 'Analizamos',
     description: 'Evaluamos tus procesos actuales y diseñamos la solución.',
-    duration: '1-2 semanas',
     color: '#00d4ff'
   },
   {
@@ -58,7 +56,6 @@ const easySteps = [
     number: '03',
     title: 'Configuramos',
     description: 'Adaptamos el sistema a tus necesidades sin interrumpir tu trabajo.',
-    duration: '2-4 semanas',
     color: '#1e40af'
   },
   {
@@ -66,7 +63,6 @@ const easySteps = [
     number: '04',
     title: 'Capacitamos',
     description: 'Tu equipo aprende a usar el sistema de manera sencilla.',
-    duration: '1 semana',
     color: '#00d4ff'
   },
   {
@@ -74,7 +70,6 @@ const easySteps = [
     number: '05',
     title: 'Implementamos',
     description: 'Ponemos en funcionamiento el sistema gradualmente.',
-    duration: '3 días',
     color: '#1e40af'
   },
   {
@@ -82,7 +77,6 @@ const easySteps = [
     number: '06',
     title: 'Te acompañamos',
     description: 'Soporte continuo para que todo funcione perfectamente.',
-    duration: 'Siempre',
     color: '#00d4ff'
   }
 ];
@@ -148,7 +142,7 @@ export default function ImplementacionesPage() {
           <Title order={1} ta="center" size="3.5rem" fw={700} c="#1e40af" lh={1.1}>
             Tu Sistema Funcionando en{' '}
             <Text span c="#00d4ff" inherit>
-              Solo 6 Semanas
+              Solo 6 pasos
             </Text>
           </Title>
           
@@ -246,14 +240,6 @@ export default function ImplementacionesPage() {
                     }}>
                       {step.number}
                     </Box>
-                    <Badge variant="light" size="sm" 
-                      style={{
-                        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-                        border: '2px solid #e3f2fd',
-                        color: '#1e40af'
-                      }}>
-                      {step.duration}
-                    </Badge>
                   </Group>
                   
                   <Stack gap="xs">
@@ -446,7 +432,7 @@ export default function ImplementacionesPage() {
       </Container>
 
       {/* Timeline Simple */}
-      <Box style={{ backgroundColor: '#1e40af' }} py={80}>
+      {/* <Box style={{ backgroundColor: '#1e40af' }} py={80}>
         <Container size="xl">
           <Stack gap="xl" align="center">
             <Title order={2} ta="center" size="2.5rem" fw={600} c="white">
@@ -492,10 +478,10 @@ export default function ImplementacionesPage() {
             </Paper>
           </Stack>
         </Container>
-      </Box>
+      </Box> */}
 
       {/* CTA Final */}
-      <Container size="xl" py={80}>
+      {/* <Container size="xl" py={80}>
         <Paper 
           p={60} 
           radius="lg" 
@@ -534,7 +520,7 @@ export default function ImplementacionesPage() {
             </Text>
           </Stack>
         </Paper>
-      </Container>
+      </Container> */}
 
       <Footer />
     </Box>

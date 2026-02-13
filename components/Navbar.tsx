@@ -28,6 +28,7 @@ import {
   IconRocket
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import { LoadingLink } from './LoadingLink';
 
 const navigationItems = [
   {
@@ -84,8 +85,8 @@ export function Navbar() {
         <Container size="xl">
           <Group h={80} justify="space-between" px="md">
             {/* Logo */}
-            <Anchor component={Link} href="/" underline="never">
-              <Group gap="md">
+            <LoadingLink href="/">
+              <Group gap="md" style={{ cursor: 'pointer', textDecoration: 'none' }}>
                 <ThemeIcon size={50} variant="filled" radius="md">
                   <IconBuilding size={28} />
                 </ThemeIcon>
@@ -98,7 +99,7 @@ export function Navbar() {
                   </Text>
                 </Box>
               </Group>
-            </Anchor>
+            </LoadingLink>
 
             {/* Desktop Navigation */}
             <Group gap={0} visibleFrom="md">
@@ -133,12 +134,10 @@ export function Navbar() {
                       </Menu.Target>
                       <Menu.Dropdown>
                         {item.submenu.map((subItem) => (
-                          <Menu.Item
-                            key={subItem.href}
-                            component={Link}
-                            href={subItem.href}
-                          >
-                            {subItem.label}
+                          <Menu.Item key={subItem.href}>
+                            <LoadingLink href={subItem.href} style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%' }}>
+                              {subItem.label}
+                            </LoadingLink>
                           </Menu.Item>
                         ))}
                       </Menu.Dropdown>
@@ -147,33 +146,32 @@ export function Navbar() {
                 }
 
                 return (
-                  <Button
-                    key={item.label}
-                    component={Link}
-                    href={item.href}
-                    variant="subtle"
-                    color="gray"
-                    styles={{
-                      root: {
-                        fontWeight: 500,
-                        color: '#495057'
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </Button>
+                  <LoadingLink key={item.label} href={item.href}>
+                    <Button
+                      variant="subtle"
+                      color="gray"
+                      styles={{
+                        root: {
+                          fontWeight: 500,
+                          color: '#495057'
+                        }
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  </LoadingLink>
                 );
               })}
 
               {/* CTA Button */}
-              <Button
-                component={Link}
-                href="/contacto"
-                ml="md"
-                leftSection={<IconRocket size={18} />}
-              >
-                Solicitar Demo
-              </Button>
+              <LoadingLink href="/contacto">
+                <Button
+                  ml="md"
+                  leftSection={<IconRocket size={18} />}
+                >
+                  Solicitar Demo
+                </Button>
+              </LoadingLink>
             </Group>
 
             {/* Mobile Menu Button */}
@@ -216,17 +214,16 @@ export function Navbar() {
                   </Text>
                   <Stack gap="xs" ml="md">
                     {item.submenu.map((subItem) => (
-                      <Button
-                        key={subItem.href}
-                        component={Link}
-                        href={subItem.href}
-                        variant="subtle"
-                        justify="flex-start"
-                        fullWidth
-                        onClick={close}
-                      >
-                        {subItem.label}
-                      </Button>
+                      <LoadingLink key={subItem.href} href={subItem.href}>
+                        <Button
+                          variant="subtle"
+                          justify="flex-start"
+                          fullWidth
+                          onClick={close}
+                        >
+                          {subItem.label}
+                        </Button>
+                      </LoadingLink>
                     ))}
                   </Stack>
                   <Divider my="sm" />
@@ -235,30 +232,29 @@ export function Navbar() {
             }
 
             return (
-              <Button
-                key={item.label}
-                component={Link}
-                href={item.href}
-                variant="subtle"
-                justify="flex-start"
-                fullWidth
-                onClick={close}
-              >
-                {item.label}
-              </Button>
+              <LoadingLink key={item.label} href={item.href}>
+                <Button
+                  variant="subtle"
+                  justify="flex-start"
+                  fullWidth
+                  onClick={close}
+                >
+                  {item.label}
+                </Button>
+              </LoadingLink>
             );
           })}
 
-          <Button
-            component={Link}
-            href="/contacto"
-            fullWidth
-            leftSection={<IconRocket size={18} />}
-            mt="md"
-            onClick={close}
-          >
-            Solicitar Demo
-          </Button>
+          <LoadingLink href="/contacto">
+            <Button
+              fullWidth
+              leftSection={<IconRocket size={18} />}
+              mt="md"
+              onClick={close}
+            >
+              Solicitar Demo
+            </Button>
+          </LoadingLink>
         </Stack>
       </Drawer>
     </>
