@@ -6,13 +6,14 @@ import { usePathname, useSearchParams } from 'next/navigation';
 interface LoadingContextType {
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
-}
+};
 
 const LoadingContext = createContext<LoadingContextType>({
   isLoading: false,
   setLoading: () => {},
 });
 
+export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
 
   function ParamsListener() {
