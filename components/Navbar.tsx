@@ -29,6 +29,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { LoadingLink } from './LoadingLink';
+import { getAssetPath } from '../utils/assets';
 
 const navigationItems = [
   {
@@ -84,7 +85,7 @@ export function Navbar() {
             <LoadingLink href="/">
               <Group gap={6} style={{ cursor: 'pointer', textDecoration: 'none' }}>
                 <Image
-                  src="/img/luna.png"
+                  src={getAssetPath("/img/logo-luna.png")}
                   alt="Logo Luna"
                   width={60}
                   height={60}
@@ -197,7 +198,7 @@ export function Navbar() {
         onClose={close}
         title={
           <Group gap="sm">
-            <Image src="/img/logo-luna.png" alt="Logo Luna" width={60} height={60} style={{ objectFit: 'contain', borderRadius: 15, background: '#fff' }} />
+            <Image src={getAssetPath("/img/logo-luna.png")} alt="Logo Luna" width={60} height={60} style={{ objectFit: 'contain', borderRadius: 15, background: '#fff' }} />
             <Box>
               <Text fw={700} size="lg" style={{ whiteSpace: 'nowrap' }}>
                 LunAI

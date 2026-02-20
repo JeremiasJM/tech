@@ -38,6 +38,7 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { LoadingLink } from './LoadingLink';
+import { getAssetPath } from '../utils/assets';
 
 const footerLinks = {
   servicios: [
@@ -112,7 +113,7 @@ export function Footer() {
             <Stack gap="sm">
               <Group gap="sm">
                 <Image
-                  src="/img/logo-luna.png"
+                  src={getAssetPath("/img/logo-luna.png")}
                   alt="Logo Luna"
                   width={48}
                   height={48}

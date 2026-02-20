@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   description: "Tecnología para un Estado más eficiente, transparente y cercano. Soluciones gubernamentales innovadoras con inteligencia artificial.",
   keywords: "gobierno digital, transformación digital, tecnología gubernamental, sistemas administrativos, inteligencia artificial",
   icons: {
-    icon: "/img/logo-luna.png",
-    shortcut: "/img/logo-luna.png",
-    apple: "/img/logo-luna.png",
+    icon: "/tech/img/logo-luna.png",
+    shortcut: "/tech/img/logo-luna.png",
+    apple: "/tech/img/logo-luna.png",
   },
 };
 
