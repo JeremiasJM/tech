@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 interface LoadingContextType {
@@ -13,14 +13,16 @@ const LoadingContext = createContext<LoadingContextType>({
   setLoading: () => {},
 });
 
-export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, [pathname, searchParams]);
+  function ParamsListener() {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    useEffect(() => {
+      setIsLoading(false);
+    }, [pathname, searchParams]);
+    return null;
+  }
 
   const setLoading = (loading: boolean) => {
     setIsLoading(loading);
@@ -28,6 +30,9 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <LoadingContext.Provider value={{ isLoading, setLoading }}>
+      <Suspense fallback={null}>
+        <ParamsListener />
+      </Suspense>
       {children}
     </LoadingContext.Provider>
   );
