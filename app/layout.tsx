@@ -5,6 +5,8 @@ import '@mantine/dates/styles.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./navbar-1079.css";
+import "./navbar-responsive.css";
 import { theme } from '../theme';
 import { LoadingProvider } from '../components/LoadingProvider';
 import { LoadingWrapper } from '../components/LoadingWrapper';
@@ -15,9 +17,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Soluciones Tecnológicas Gubernamentales | TechGov",
-  description: "Tecnología para un Estado más eficiente, transparente y cercano. Soluciones tecnológicas especializadas para organismos gubernamentales.",
-  keywords: "gobierno digital, transformación digital, tecnología gubernamental, sistemas administrativos",
+  title: "LunAI - Soluciones Gubernamentales",
+  description: "Tecnología para un Estado más eficiente, transparente y cercano. Soluciones gubernamentales innovadoras con inteligencia artificial.",
+  keywords: "gobierno digital, transformación digital, tecnología gubernamental, sistemas administrativos, inteligencia artificial",
+  icons: {
+    icon: "/img/logo-luna.png",
+    shortcut: "/img/logo-luna.png",
+    apple: "/img/logo-luna.png",
+  },
 };
 
 export default function RootLayout({

@@ -1,0 +1,21 @@
+@media (max-width: 1024px) {
+  .responsive-navbar-link {
+    font-size: 0.91rem !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+.responsive-lunai-title {
+  font-size: 2rem;
+}
+
+@media (max-width: 1079px) {
+  .responsive-lunai-title {
+    font-size: 1.8rem;
+  }
+  .responsive-navbar-link {
+    font-size: 0.97rem;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

@@ -17,7 +17,6 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconChevronDown,
-  IconBuilding,
   IconShield,
   IconUsers,
   IconFileText,
@@ -27,14 +26,11 @@ import {
   IconAward,
   IconRocket
 } from '@tabler/icons-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { LoadingLink } from './LoadingLink';
 
 const navigationItems = [
-  {
-    label: 'Inicio',
-    href: '/',
-  },
   {
     label: 'Servicios',
     href: '#',
@@ -86,16 +82,22 @@ export function Navbar() {
           <Group h={80} justify="space-between" px="md">
             {/* Logo */}
             <LoadingLink href="/">
-              <Group gap="md" style={{ cursor: 'pointer', textDecoration: 'none' }}>
-                <ThemeIcon size={50} variant="filled" radius="md">
-                  <IconBuilding size={28} />
-                </ThemeIcon>
+              <Group gap={6} style={{ cursor: 'pointer', textDecoration: 'none' }}>
+                <Image
+                  src="/img/luna.png"
+                  alt="Logo Luna"
+                  width={60}
+                  height={60}
+                  style={{ objectFit: 'contain', borderRadius: 15, background: '#fff', minWidth: 40, minHeight: 40 }}
+                  className="logo-navbar"
+                />
                 <Box>
-                  <Text fw={700} size="xl" c="dark.8" lh={1.2}>
-                    TechGov
+                  <Text fw={700} size="xl" c="dark.8" lh={1.2} className="brand-title-navbar responsive-lunai-title">
+                    LunAI
                   </Text>
-                  <Text size="xs" c="dimmed" lh={1.2}>
-                    Soluciones Gubernamentales
+                  <Text size="xs" c="dimmed" lh={1.2} className="subtitle-navbar">
+                    <span className="subtitle-full">Soluciones Gubernamentales</span>
+                    <span className="subtitle-short">Sol. Gubernamentales</span>
                   </Text>
                 </Box>
               </Group>
@@ -121,6 +123,7 @@ export function Navbar() {
                         <Button
                           variant="subtle"
                           color="gray"
+                          className="responsive-navbar-link"
                           rightSection={<IconChevronDown size={16} />}
                           styles={{
                             root: {
@@ -150,6 +153,7 @@ export function Navbar() {
                     <Button
                       variant="subtle"
                       color="gray"
+                      className="responsive-navbar-link"
                       styles={{
                         root: {
                           fontWeight: 500,
@@ -168,6 +172,7 @@ export function Navbar() {
                 <Button
                   ml="md"
                   leftSection={<IconRocket size={18} />}
+                  className="responsive-navbar-link"
                 >
                   Solicitar Demo
                 </Button>
@@ -192,18 +197,23 @@ export function Navbar() {
         onClose={close}
         title={
           <Group gap="sm">
-            <ThemeIcon size={40} variant="filled" radius="md">
-              <IconBuilding size={22} />
-            </ThemeIcon>
-            <Text fw={700} size="lg">
-              TechGov
-            </Text>
+            <Image src="/img/logo-luna.png" alt="Logo Luna" width={60} height={60} style={{ objectFit: 'contain', borderRadius: 15, background: '#fff' }} />
+            <Box>
+              <Text fw={700} size="lg" style={{ whiteSpace: 'nowrap' }}>
+                LunAI
+              </Text>
+            </Box>
           </Group>
         }
         padding="md"
         size="sm"
         hiddenFrom="md"
       >
+        <Box mb="xs" mt="xs" px="xs">
+          <Text size="xs" c="dimmed" lh={1.2} fw={600} style={{ textAlign: 'center' }}>
+            Soluciones Gubernamentales
+          </Text>
+        </Box>
         <Stack gap="xs">
           {navigationItems.map((item) => {
             if (item.submenu) {

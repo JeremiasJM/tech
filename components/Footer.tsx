@@ -36,6 +36,7 @@ import {
   IconExternalLink
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { LoadingLink } from './LoadingLink';
 
 const footerLinks = {
@@ -110,21 +111,19 @@ export function Footer() {
           <Grid.Col span={{ base: 12, md: 4 }}>
             <Stack gap="sm">
               <Group gap="sm">
-                <Paper
-                  p="sm"
-                  style={{
-                    background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
-                    borderRadius: '12px'
-                  }}
-                >
-                  <IconBuilding size={32} color="white" />
-                </Paper>
+                <Image
+                  src="/img/logo-luna.png"
+                  alt="Logo Luna"
+                  width={48}
+                  height={48}
+                  style={{ objectFit: 'contain', borderRadius: 12 }}
+                />
                 <Box>
                   <Text fw={700} size="xl" c="white" style={{ lineHeight: 1.2 }}>
-                    TechGov
+                    LunAI
                   </Text>
                   <Text size="sm" c="blue.3" fw={500}>
-                    Soluciones Tecnológicas Gubernamentales
+                    Soluciones Gubernamentales
                   </Text>
                 </Box>
               </Group>
@@ -141,7 +140,7 @@ export function Footer() {
                   <Stack gap="xs">
                     <Group gap="xs">
                       <IconMail size={16} color="#74c0fc" />
-                      <Text size="sm" c="gray.3">contacto@techgov.com.ar</Text>
+                      <Text size="sm" c="gray.3">contacto@lunai.com.ar</Text>
                     </Group>
                     <Group gap="xs">
                       <IconPhone size={16} color="#74c0fc" />
