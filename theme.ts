@@ -2,6 +2,7 @@ import { createTheme } from '@mantine/core';
  
 export const theme = createTheme({
   fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+  defaultColorScheme: 'light',
  
   colors: {
     primary: [
@@ -87,12 +88,6 @@ export const theme = createTheme({
       styles: {
         root: {
           fontWeight: 500,
-          '&[data-variant="filled"]': {
-            backgroundColor: '#1e88e5',
-            '&:hover': {
-              backgroundColor: '#1565c0',
-            },
-          },
         },
       },
     },
@@ -171,9 +166,6 @@ export const theme = createTheme({
       styles: {
         root: {
           color: '#0f172a',
-          '&[data-variant="dimmed"]': {
-            color: '#64748b',
-          },
         },
       },
     },
